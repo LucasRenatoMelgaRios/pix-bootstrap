@@ -52,6 +52,23 @@ loras:
     source: civitai
     id: 1565125
 
+  # Anna Yanami (Makeine: Too Many Losing Heroines!) — Civitai model 607474, creador soralz.
+  # Mismo LoRA que en SeaArt (mismo nombre de archivo exacto, mismo creador) — SeaArt no
+  # permitia descarga directa, este es el original re-publicado en Civitai.
+  # Para WAI-illustrious / checkpoints Illustrious. versionId 1311670 "ixl-v1.0".
+  # Trigger: "anna yanami (makeine), blue hair, medium hair, ahoge, blue eyes"
+  # Outfits (agregar al prompt junto al trigger): school uniform / winter school uniform /
+  # swimsuit / ghost costume / outing — ver docs/models.md para el detalle de cada uno.
+  - dest: anna_yanami_illustrious.safetensors
+    source: civitai
+    id: 1311670
+
+  # Anna Yanami — para RedFuku / checkpoints Pony. Mismo model 607474, versionId 914046 "v4.0".
+  # Trigger: "anna yanami, blue hair, medium hair, ahoge, blue eyes" (sin "(makeine)").
+  - dest: anna_yanami_pony.safetensors
+    source: civitai
+    id: 914046
+
 vae: []
 
 controlnet: []
