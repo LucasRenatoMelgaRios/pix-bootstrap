@@ -33,13 +33,21 @@ checkpoints:
     path: redfuku_202510_fp16.safetensors
 
 loras:
-  # Yuki Suou — para RedFuku / cualquier checkpoint Pony (Civitai 647069 / versionId 723900).
+  # Yuki Suou — para RedFuku / cualquier checkpoint Pony.
+  # Civitai model 570729 "Season 1 (V2)" / versionId 931920 (217.9MB, 124 likes) — reemplaza
+  # a un primer intento (versionId 723900, 55MB, sin trigger word, daba OTRO personaje).
+  # Trigger words (agregar al prompt): "long hair, brown hair, purple eyes, blazer,
+  # pleated skirt, long sleeves"
   - dest: yuki_suou_pony.safetensors
     source: civitai
-    id: 723900
+    id: 931920
 
   # Yuki Suou — para WAI-illustrious / checkpoints Illustrious (Civitai 1385055 / versionId 1565125,
-  # creador nochekaiser881, "anime s1"). Se instala también para cubrir ambas bases.
+  # creador nochekaiser881, "anime s1").
+  # Trigger words: "yuki suou, long hair, bangs, brown hair, black hair, hair between eyes,
+  # purple eyes, half updo, mature female, small breasts, anime screencap" + (opcional, uniforme)
+  # "shirt, bow, school uniform, jacket, white shirt, collared shirt, bowtie, red bow, blazer,
+  # red bowtie, black skirt, pleated skirt,"
   - dest: yuki_suou_illustrious.safetensors
     source: civitai
     id: 1565125
