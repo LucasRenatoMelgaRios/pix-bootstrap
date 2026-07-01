@@ -8,7 +8,7 @@
 # y que ajustes REPO abajo a la URL pública de tu pix-bootstrap.
 # ──────────────────────────────────────────────────────────────────────────────
 set -e
-REPO="https://github.com/CHANGE_ME/pix-bootstrap.git"   # ← tu repo público
+REPO="https://github.com/LucasRenatoMelgaRios/pix-bootstrap.git"   # tu repo público
 DIR="/workspace/pix-bootstrap"
 
 if [ ! -d "$DIR/.git" ]; then

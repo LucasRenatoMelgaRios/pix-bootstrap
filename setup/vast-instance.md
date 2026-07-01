@@ -36,7 +36,7 @@ bootstrap solo.
 **B) Manual:** entra por SSH y corre:
 ```bash
 cd /workspace
-git clone https://github.com/CHANGE_ME/pix-bootstrap.git
+git clone https://github.com/LucasRenatoMelgaRios/pix-bootstrap.git
 cd pix-bootstrap
 cp .env.example .env && nano .env      # pega los tokens
 ./bootstrap.sh
