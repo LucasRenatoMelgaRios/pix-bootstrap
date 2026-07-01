@@ -24,7 +24,13 @@ checkpoints:
     source: civitai
     id: 2883731
 
-loras: []
+loras:
+  # Yuki Suou (Alya) — Civitai model 647069 / versionId 723900. Base: Pony.
+  # OJO: es un LoRA de Pony → úsalo con un checkpoint Pony (p.ej. RedFuku), NO con
+  # el WAI-illustrious de arriba (Pony y Illustrious no son compatibles entre sí).
+  - dest: yuki_suou.safetensors
+    source: civitai
+    id: 723900
 
 vae: []
 
