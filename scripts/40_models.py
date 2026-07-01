@@ -13,6 +13,7 @@ import os
 import sys
 import urllib.request
 import urllib.error
+from urllib.parse import urlsplit
 
 # Salida robusta en cualquier consola (la instancia es Linux/UTF-8; esto además
 # evita fallos en terminales Windows cp1252 al validar el script localmente).
@@ -20,6 +21,25 @@ try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except (AttributeError, ValueError):
     pass
+
+
+class _StripAuthRedirect(urllib.request.HTTPRedirectHandler):
+    """Quita el header Authorization al redirigir a OTRO host.
+
+    Civitai responde 307 → URL firmada de R2/Cloudflare (con auth en el query
+    string). Si urllib arrastra el `Authorization: Bearer` al host del CDN, este
+    la rechaza (HTTP 400/403). Al cambiar de host, la eliminamos.
+    """
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        newreq = super().redirect_request(req, fp, code, msg, headers, newurl)
+        if newreq is not None and urlsplit(req.full_url).netloc != urlsplit(newurl).netloc:
+            newreq.headers = {k: v for k, v in newreq.headers.items()
+                              if k.lower() != "authorization"}
+        return newreq
+
+
+_OPENER = urllib.request.build_opener(_StripAuthRedirect)
 
 # Tipo declarado -> subdirectorio bajo ComfyUI/models
 TYPE_DIRS = {
@@ -79,7 +99,7 @@ def build_url_and_headers(entry):
 def download(url, headers, dest, dry_run):
     tmp = dest + ".part"
     req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=60) as resp:
+    with _OPENER.open(req, timeout=60) as resp:
         ctype = resp.headers.get("Content-Type", "")
         # Civitai devuelve HTML cuando el token es inválido / se requiere login.
         if "text/html" in ctype:
