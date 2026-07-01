@@ -99,7 +99,8 @@ def build_url_and_headers(entry):
 def download(url, headers, dest, dry_run):
     tmp = dest + ".part"
     req = urllib.request.Request(url, headers=headers)
-    with _OPENER.open(req, timeout=60) as resp:
+    # timeout amplio: es el tiempo máx por operación de socket, no del total.
+    with _OPENER.open(req, timeout=120) as resp:
         ctype = resp.headers.get("Content-Type", "")
         # Civitai devuelve HTML cuando el token es inválido / se requiere login.
         if "text/html" in ctype:
@@ -111,6 +112,7 @@ def download(url, headers, dest, dry_run):
             return
         total = int(resp.headers.get("Content-Length", 0))
         done = 0
+        last_pct = -1
         with open(tmp, "wb") as out:
             while True:
                 chunk = resp.read(1 << 20)
@@ -120,8 +122,14 @@ def download(url, headers, dest, dry_run):
                 done += len(chunk)
                 if total:
                     pct = done * 100 // total
-                    print(f"\r      {pct:3d}%  ({done // (1<<20)}/{total // (1<<20)} MB)",
-                          end="", flush=True)
+                    if pct != last_pct:  # solo al cambiar de % (log limpio)
+                        last_pct = pct
+                        print(f"\r      {pct:3d}%  ({done // (1<<20)}/{total // (1<<20)} MB)",
+                              end="", flush=True)
+                    # Ya recibimos todo Content-Length: cortamos sin un read() extra
+                    # que se bloquearía esperando EOF (causaba "read operation timed out").
+                    if done >= total:
+                        break
         if total:
             print()
     if os.path.getsize(tmp) < MIN_BYTES:
