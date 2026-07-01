@@ -10,10 +10,8 @@ Uso:  python3 40_models.py [--manifest RUTA] [--comfyui RUTA] [--dry-run]
 """
 import argparse
 import os
+import subprocess
 import sys
-import urllib.request
-import urllib.error
-from urllib.parse import urlsplit
 
 # Salida robusta en cualquier consola (la instancia es Linux/UTF-8; esto además
 # evita fallos en terminales Windows cp1252 al validar el script localmente).
@@ -21,25 +19,6 @@ try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except (AttributeError, ValueError):
     pass
-
-
-class _StripAuthRedirect(urllib.request.HTTPRedirectHandler):
-    """Quita el header Authorization al redirigir a OTRO host.
-
-    Civitai responde 307 → URL firmada de R2/Cloudflare (con auth en el query
-    string). Si urllib arrastra el `Authorization: Bearer` al host del CDN, este
-    la rechaza (HTTP 400/403). Al cambiar de host, la eliminamos.
-    """
-
-    def redirect_request(self, req, fp, code, msg, headers, newurl):
-        newreq = super().redirect_request(req, fp, code, msg, headers, newurl)
-        if newreq is not None and urlsplit(req.full_url).netloc != urlsplit(newurl).netloc:
-            newreq.headers = {k: v for k, v in newreq.headers.items()
-                              if k.lower() != "authorization"}
-        return newreq
-
-
-_OPENER = urllib.request.build_opener(_StripAuthRedirect)
 
 # Tipo declarado -> subdirectorio bajo ComfyUI/models
 TYPE_DIRS = {
@@ -97,44 +76,35 @@ def build_url_and_headers(entry):
 
 
 def download(url, headers, dest, dry_run):
+    """Descarga con curl: robusto para archivos grandes (reintentos + resume) y,
+    clave, curl QUITA el header Authorization al redirigir a otro host (civitai→R2),
+    que es justo lo que necesitamos. urllib fallaba en la cola de descargas de ~7GB.
+    """
+    if dry_run:
+        log(f"[dry-run] descargaría desde {url}")
+        return
     tmp = dest + ".part"
-    req = urllib.request.Request(url, headers=headers)
-    # timeout amplio: es el tiempo máx por operación de socket, no del total.
-    with _OPENER.open(req, timeout=120) as resp:
-        ctype = resp.headers.get("Content-Type", "")
-        # Civitai devuelve HTML cuando el token es inválido / se requiere login.
-        if "text/html" in ctype:
-            raise RuntimeError(
-                f"la respuesta es HTML ({ctype}) — token inválido o descarga que requiere login"
-            )
-        if dry_run:
-            log(f"[dry-run] descargaría desde {url}")
-            return
-        total = int(resp.headers.get("Content-Length", 0))
-        done = 0
-        last_pct = -1
-        with open(tmp, "wb") as out:
-            while True:
-                chunk = resp.read(1 << 20)
-                if not chunk:
-                    break
-                out.write(chunk)
-                done += len(chunk)
-                if total:
-                    pct = done * 100 // total
-                    if pct != last_pct:  # solo al cambiar de % (log limpio)
-                        last_pct = pct
-                        print(f"\r      {pct:3d}%  ({done // (1<<20)}/{total // (1<<20)} MB)",
-                              end="", flush=True)
-                    # Ya recibimos todo Content-Length: cortamos sin un read() extra
-                    # que se bloquearía esperando EOF (causaba "read operation timed out").
-                    if done >= total:
-                        break
-        if total:
-            print()
-    if os.path.getsize(tmp) < MIN_BYTES:
-        os.remove(tmp)
-        raise RuntimeError("archivo descargado demasiado pequeño (probable error)")
+    cmd = [
+        "curl", "-fL", "--silent", "--show-error",
+        "--retry", "5", "--retry-delay", "3", "--retry-connrefused",
+        "--connect-timeout", "30",
+        "-C", "-",            # resume si quedó un .part parcial
+        "-o", tmp, url,
+    ]
+    for k, v in headers.items():
+        if k.lower() == "user-agent":
+            cmd += ["-A", v]
+        else:
+            cmd += ["-H", f"{k}: {v}"]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    if res.returncode != 0:
+        raise RuntimeError(f"curl falló ({res.returncode}): {res.stderr.strip() or 'sin detalle'}")
+    if not os.path.exists(tmp) or os.path.getsize(tmp) < MIN_BYTES:
+        try:
+            os.remove(tmp)
+        except OSError:
+            pass
+        raise RuntimeError("archivo descargado demasiado pequeño (probable error/HTML)")
     os.replace(tmp, dest)
 
 
@@ -180,7 +150,7 @@ def main():
                 if not args.dry_run:
                     log(f"✓ {mtype}/{dest_name}")
                 downloaded += 1
-            except (urllib.error.URLError, urllib.error.HTTPError, RuntimeError, OSError) as e:
+            except (RuntimeError, OSError, subprocess.SubprocessError) as e:
                 log(f"✗ {mtype}/{dest_name}: {e}")
                 failed += 1
 
