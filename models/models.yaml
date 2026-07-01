@@ -19,18 +19,30 @@
 # ──────────────────────────────────────────────────────────────────────────────
 
 checkpoints:
-  # WAI-illustrious-SDXL v17.0 (Civitai model 827184 / versionId 2883731) — modelo principal
+  # WAI-illustrious-SDXL v17.0 (Civitai 827184 / versionId 2883731). Base: Illustrious.
   - dest: waiIllustriousSDXL_v170.safetensors
     source: civitai
     id: 2883731
 
+  # RedFuku (chatpig/redfuku en HuggingFace). Base: SDXL estilo Pony (usa tags score_9/source_anime).
+  # Es el fp16 TODO-EN-UNO (7.1 GB) → carga con CheckpointLoaderSimple. Repo público (sin token).
+  # Nota: el repo también trae clip/vae sueltos y GGUF; NO los necesitamos (este .safetensors es completo).
+  - dest: redfuku.safetensors
+    source: huggingface
+    repo: chatpig/redfuku
+    path: redfuku_202510_fp16.safetensors
+
 loras:
-  # Yuki Suou (Alya) — Civitai model 647069 / versionId 723900. Base: Pony.
-  # OJO: es un LoRA de Pony → úsalo con un checkpoint Pony (p.ej. RedFuku), NO con
-  # el WAI-illustrious de arriba (Pony y Illustrious no son compatibles entre sí).
-  - dest: yuki_suou.safetensors
+  # Yuki Suou — para RedFuku / cualquier checkpoint Pony (Civitai 647069 / versionId 723900).
+  - dest: yuki_suou_pony.safetensors
     source: civitai
     id: 723900
+
+  # Yuki Suou — para WAI-illustrious / checkpoints Illustrious (Civitai 1385055 / versionId 1565125,
+  # creador nochekaiser881, "anime s1"). Se instala también para cubrir ambas bases.
+  - dest: yuki_suou_illustrious.safetensors
+    source: civitai
+    id: 1565125
 
 vae: []
 
