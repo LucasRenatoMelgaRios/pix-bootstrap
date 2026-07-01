@@ -1,0 +1,22 @@
+# Secretos — NUNCA se comitean (los tokens van aquí, no en el repo)
+.env
+.env.local
+*.local
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Pesos de modelos: se descargan en la instancia, jamás se versionan
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.gguf
+
+# Logs / temporales
+*.log
+*.part

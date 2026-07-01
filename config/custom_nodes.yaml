@@ -1,0 +1,20 @@
+# ── Custom nodes de ComfyUI (declarativo) ─────────────────────────────────────
+# `scripts/30_custom_nodes.sh` clona/actualiza cada repo en ${COMFYUI}/custom_nodes
+# (idempotente: si ya existe hace `git pull`) e instala su requirements.txt si `pip: true`.
+#
+# Cada entrada:
+#   url:  URL del repo git (obligatorio)
+#   ref:  rama/tag/commit  (opcional, default: la rama por defecto)
+#   pip:  true|false       (opcional, default true — instala requirements.txt si existe)
+#
+# Vacío por defecto: el txt2img de WAI-illustrious NO necesita nodos extra.
+# Descomenta/añade lo que necesites, por ejemplo:
+#
+# nodes:
+#   - url: https://github.com/ltdrdata/ComfyUI-Manager.git   # normalmente ya viene en el template
+#   - url: https://github.com/cubiq/ComfyUI_IPAdapter_plus.git
+#     pip: true
+#   - url: https://github.com/Fannovel16/comfyui_controlnet_aux.git
+#     ref: main
+
+nodes: []

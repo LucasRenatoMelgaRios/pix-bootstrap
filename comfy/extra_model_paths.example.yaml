@@ -1,0 +1,13 @@
+# ── extra_model_paths.yaml (opcional) ─────────────────────────────────────────
+# ComfyUI puede leer modelos desde rutas extra además de ${COMFYUI}/models.
+# NO se necesita en el flujo estándar (bootstrap descarga a ${COMFYUI}/models/...).
+# Úsalo solo si guardas pesos en otra ubicación de la instancia.
+#
+# Copia a ${COMFYUI}/extra_model_paths.yaml en la instancia si lo necesitas.
+
+# otra_ubicacion:
+#   base_path: /workspace/otros-modelos/
+#   checkpoints: checkpoints
+#   loras: loras
+#   vae: vae
+#   controlnet: controlnet

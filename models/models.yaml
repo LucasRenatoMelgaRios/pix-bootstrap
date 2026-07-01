@@ -1,0 +1,35 @@
+# ── Manifiesto declarativo de modelos ─────────────────────────────────────────
+# Edita SOLO este archivo para añadir/quitar pesos. `scripts/40_models.py` descarga
+# lo que falte (idempotente: salta lo que ya existe). Los pesos NO se versionan.
+#
+# Cada entrada:
+#   dest:   nombre del archivo destino (se guarda en el subdir correcto de ComfyUI)
+#   source: civitai | huggingface | url
+#   # según source:
+#   id:     civitai versionId           (source: civitai)
+#   repo:   org/nombre                   (source: huggingface)
+#   path:   ruta/dentro/del/repo.safetensors   (source: huggingface)
+#   rev:    rama/tag/commit (default main)     (source: huggingface, opcional)
+#   url:    URL directa de descarga      (source: url)
+#
+# Tipos soportados → subdir de ComfyUI:
+#   checkpoints → models/checkpoints      loras       → models/loras
+#   vae         → models/vae              controlnet  → models/controlnet
+#   upscale_models → models/upscale_models  embeddings → models/embeddings
+# ──────────────────────────────────────────────────────────────────────────────
+
+checkpoints:
+  # WAI-illustrious-SDXL v17.0 (Civitai model 827184 / versionId 2883731) — modelo principal
+  - dest: waiIllustriousSDXL_v170.safetensors
+    source: civitai
+    id: 2883731
+
+loras: []
+
+vae: []
+
+controlnet: []
+
+upscale_models: []
+
+embeddings: []
