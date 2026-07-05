@@ -69,6 +69,12 @@ loras:
     source: civitai
     id: 914046
 
+  # Mie Ai (Suki na Ko ga Megane wo Wasureta) - Illustrious
+  # Triggers: mie ai, long hair,
+  - dest: mie_ai_illustrious.safetensors
+    source: civitai
+    id: 1495191
+
 vae: []
 
 controlnet: []
