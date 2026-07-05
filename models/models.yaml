@@ -103,7 +103,7 @@ loras:
   # Tachibana Mikari (2.5 Dimensional Seduction) - Pony
   - dest: mikari_pony.safetensors
     source: civitai
-    id: 424765
+    id: 644838
 
   # Amano Ririsa (2.5 Dimensional Seduction) - Pony
   - dest: ririsa_pony.safetensors
