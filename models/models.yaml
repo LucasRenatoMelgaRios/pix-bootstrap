@@ -27,10 +27,10 @@ checkpoints:
   # RedFuku (chatpig/redfuku en HuggingFace). Base: SDXL estilo Pony (usa tags score_9/source_anime).
   # Es el fp16 TODO-EN-UNO (7.1 GB) → carga con CheckpointLoaderSimple. Repo público (sin token).
   # Nota: el repo también trae clip/vae sueltos y GGUF; NO los necesitamos (este .safetensors es completo).
-  # - dest: redfuku.safetensors
-  #   source: huggingface
-  #   repo: chatpig/redfuku
-  #   path: redfuku_202510_fp16.safetensors
+  - dest: redfuku.safetensors
+    source: huggingface
+    repo: chatpig/redfuku
+    path: redfuku_202510_fp16.safetensors
 
 loras:
   # Yuki Suou — para RedFuku / cualquier checkpoint Pony.
