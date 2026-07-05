@@ -75,6 +75,51 @@ loras:
     source: civitai
     id: 1495191
 
+  # Masha (Alya Sometimes Hides Her Feelings) - Illustrious
+  - dest: masha_illustrious.safetensors
+    source: civitai
+    id: 1087752
+
+  # Ayano Kimishima (Alya Sometimes Hides Her Feelings) - Illustrious
+  - dest: ayano_illustrious.safetensors
+    source: civitai
+    id: 1120785
+
+  # Yuki Suou (Alya Sometimes Hides Her Feelings) - Illustrious
+  - dest: yuki_suou_illustrious.safetensors
+    source: civitai
+    id: 1295354
+
+  # Alya (Alisa Mikhailovna Kujou) - Pony
+  - dest: alya_pony.safetensors
+    source: civitai
+    id: 623038
+
+  # Miyamae Nonoa (Alya Sometimes Hides Her Feelings) - Pony
+  - dest: nonoa_pony.safetensors
+    source: civitai
+    id: 759171
+
+  # Tachibana Mikari (2.5 Dimensional Seduction) - Pony
+  - dest: mikari_pony.safetensors
+    source: civitai
+    id: 424765
+
+  # Amano Ririsa (2.5 Dimensional Seduction) - Pony
+  - dest: ririsa_pony.safetensors
+    source: civitai
+    id: 641668
+
+  # Towa (Studio Apartment, Angel Included) - Pony
+  - dest: towa_pony.safetensors
+    source: civitai
+    id: 614657
+
+  # Seiha Shiunji (The Shiunji Family Children) - Illustrious
+  - dest: seiha_illustrious.safetensors
+    source: civitai
+    id: 1915288
+
 vae: []
 
 controlnet: []
