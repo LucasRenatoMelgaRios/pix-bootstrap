@@ -120,6 +120,11 @@ loras:
     source: civitai
     id: 1915288
 
+  # Varesa (Genshin Impact) XL/Illustrious LoRa
+  - dest: varesa_illustrious.safetensors
+    source: civitai
+    id: 1961213
+
 vae: []
 
 controlnet: []
