@@ -16,7 +16,13 @@ TRIGGER="$1"
 ZIP_PATH="${2:-../images/lena.zip}"
 TRAIN_DIR="/workspace/lora_train"
 KOHYA_DIR="/workspace/kohya_ss"
-MODEL_REPO="gsdf/PonyDiffusionV6XL"
+MODEL_REPO="/workspace/pony_v6.safetensors"
+
+# Descargar Pony V6 desde Civitai (sin necesidad de cuenta)
+if [ ! -f "$MODEL_REPO" ]; then
+    echo "Descargando Pony Diffusion V6 XL desde Civitai..."
+    wget -q --show-progress -O "$MODEL_REPO" "https://civitai.com/api/download/models/290640"
+fi
 
 if [ ! -f "$ZIP_PATH" ]; then
     echo "Error: No se encontró el archivo ZIP en $ZIP_PATH"
