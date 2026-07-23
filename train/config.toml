@@ -1,0 +1,28 @@
+[sdxl_arguments]
+cache_text_encoder_outputs = true
+no_half_vae = true
+mixed_precision = "bf16"
+save_precision = "bf16"
+
+[model_arguments]
+v2 = false
+
+[dataset_arguments]
+resolution = "1024,1024"
+cache_latents = true
+cache_latents_to_disk = true
+
+[training_arguments]
+network_module = "networks.lora"
+network_dim = 32
+network_alpha = 16
+lr_scheduler = "constant"
+optimizer_type = "Adafactor"
+optimizer_args = ["scale_parameter=False", "relative_step=False", "warmup_init=False"]
+learning_rate = 4e-4
+max_train_epochs = 10
+train_batch_size = 2
+gradient_checkpointing = true
+xformers = true
+save_every_n_epochs = 2
+save_model_as = "safetensors"
