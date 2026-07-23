@@ -78,8 +78,19 @@ python "$TAGGER_SCRIPT" \
     --undesired_tags "" \
     --frequency_tags \
     --caption_separator ", " \
-    --repo_id SmilingWolf/wd-v1-4-convnextv2-tagger-v2 \
-    --caption_prefix "${TRIGGER}, "
+    --repo_id SmilingWolf/wd-v1-4-convnextv2-tagger-v2
+
+# Agregar el trigger word al principio de todos los archivos .txt manualmente
+# (Esto es 100% a prueba de fallos contra cualquier versión de Kohya)
+echo "Añadiendo palabra clave '$TRIGGER' a los archivos de texto..."
+for txt_file in "$TRAIN_DIR/img/40_${TRIGGER}"/*.txt; do
+    if [ -f "$txt_file" ]; then
+        # Leemos el contenido actual
+        current_content=$(cat "$txt_file")
+        # Escribimos el trigger seguido del contenido
+        echo "${TRIGGER}, $current_content" > "$txt_file"
+    fi
+done
 
 # 4. Entrenamiento SDXL (Pony V6)
 echo ""
