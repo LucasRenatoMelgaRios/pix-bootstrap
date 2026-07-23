@@ -106,7 +106,7 @@ loras:
   #   id: 1572713
 
   # Milena (Secret Class) - Pony
-  - dest: milena_lora-000004.safetensors
+  - dest: milena_lora-000006.safetensors
     source: civitai
     id: 3155308
 
