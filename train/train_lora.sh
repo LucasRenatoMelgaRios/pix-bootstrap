@@ -78,6 +78,7 @@ python "$TAGGER_SCRIPT" \
     --undesired_tags "" \
     --frequency_tags \
     --caption_separator ", " \
+    --onnx \
     --repo_id SmilingWolf/wd-v1-4-convnextv2-tagger-v2
 
 # Agregar el trigger word al principio de todos los archivos .txt manualmente
