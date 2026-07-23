@@ -105,6 +105,11 @@ loras:
     source: civitai
     id: 1572713
 
+  # Milena (Secret Class) - Pony
+  - dest: milena_lora-000002.safetensors
+    source: civitai
+    id: 3155308
+
 vae: []
 
 controlnet: []
