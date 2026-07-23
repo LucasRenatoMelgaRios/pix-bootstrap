@@ -42,16 +42,27 @@ unzip -q -j "$ZIP_PATH" -d "$TRAIN_DIR/img/40_${TRIGGER}"
 echo "Dataset extraído. Archivos encontrados:"
 ls -1 "$TRAIN_DIR/img/40_${TRIGGER}" | wc -l
 
-# 3. Auto-Tagger (WD14)
+# 3. Buscar carpeta de Kohya y Auto-Tagger (WD14)
 echo ""
 echo "[3/4] Auto-Etiquetado con WD14 Tagger..."
-if [ ! -d "$KOHYA_DIR/venv" ]; then
-    echo "Error: No se encontró el entorno virtual de Kohya_ss en $KOHYA_DIR/venv"
-    echo "Asegúrate de estar usando la plantilla Kohya's GUI en Vast.ai"
-    exit 1
+
+# Buscamos dónde instaló Vast.ai el Kohya_ss
+if [ -d "/workspace/kohya_ss" ]; then
+    KOHYA_DIR="/workspace/kohya_ss"
+elif [ -d "/kohya_ss" ]; then
+    KOHYA_DIR="/kohya_ss"
+elif [ -f "./sdxl_train_network.py" ]; then
+    KOHYA_DIR="."
+else
+    # Buscar en todo el sistema (puede tardar un poco)
+    KOHYA_DIR=$(dirname $(find / -name "sdxl_train_network.py" -type f -print -quit 2>/dev/null))
 fi
 
-source "$KOHYA_DIR/venv/bin/activate"
+echo "Carpeta de Kohya encontrada en: $KOHYA_DIR"
+
+if [ -f "$KOHYA_DIR/venv/bin/activate" ]; then
+    source "$KOHYA_DIR/venv/bin/activate"
+fi
 cd "$KOHYA_DIR"
 
 python finetune/tag_images_by_wd14_tagger.py \
