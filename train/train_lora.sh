@@ -46,26 +46,29 @@ ls -1 "$TRAIN_DIR/img/40_${TRIGGER}" | wc -l
 echo ""
 echo "[3/4] Auto-Etiquetado con WD14 Tagger..."
 
-# Buscamos dónde instaló Vast.ai el Kohya_ss
-if [ -d "/workspace/kohya_ss" ]; then
-    KOHYA_DIR="/workspace/kohya_ss"
-elif [ -d "/kohya_ss" ]; then
-    KOHYA_DIR="/kohya_ss"
-elif [ -f "./sdxl_train_network.py" ]; then
-    KOHYA_DIR="."
-else
-    # Buscar en todo el sistema (puede tardar un poco)
-    KOHYA_DIR=$(dirname $(find / -name "sdxl_train_network.py" -type f -print -quit 2>/dev/null))
+# Buscamos dónde instaló Vast.ai los scripts de Kohya
+# (En versiones nuevas pueden estar dentro de sd-scripts)
+TAGGER_SCRIPT=$(find / -name "tag_images_by_wd14_tagger.py" -type f -print -quit 2>/dev/null || true)
+TRAIN_SCRIPT=$(find / -name "sdxl_train_network.py" -type f -print -quit 2>/dev/null || true)
+
+if [ -z "$TAGGER_SCRIPT" ] || [ -z "$TRAIN_SCRIPT" ]; then
+    echo "Error: No se encontraron los scripts de Kohya_ss (tagger o train_network)."
+    exit 1
 fi
 
-echo "Carpeta de Kohya encontrada en: $KOHYA_DIR"
+echo "Script Tagger encontrado en: $TAGGER_SCRIPT"
+echo "Script Train encontrado en: $TRAIN_SCRIPT"
 
-if [ -f "$KOHYA_DIR/venv/bin/activate" ]; then
-    source "$KOHYA_DIR/venv/bin/activate"
+# Activar entorno virtual si existe en el directorio base de Kohya
+KOHYA_BASE=$(dirname $(dirname "$TRAIN_SCRIPT"))
+if [ -f "$KOHYA_BASE/venv/bin/activate" ]; then
+    source "$KOHYA_BASE/venv/bin/activate"
 fi
-cd "$KOHYA_DIR"
 
-python finetune/tag_images_by_wd14_tagger.py \
+# Vamos al directorio del tagger para asegurar rutas relativas si las necesita
+cd $(dirname "$TAGGER_SCRIPT")/..
+
+python "$TAGGER_SCRIPT" \
     "$TRAIN_DIR/img/40_${TRIGGER}" \
     --batch_size 4 \
     --general_threshold 0.35 \
@@ -84,9 +87,11 @@ echo "[4/4] Iniciando entrenamiento LoRA (SDXL - Pony V6)..."
 # Usamos el config.toml provisto en pix-bootstrap
 CONFIG_FILE="/workspace/pix-bootstrap/train/config.toml"
 
+cd $(dirname "$TRAIN_SCRIPT")
+
 accelerate launch \
     --num_cpu_threads_per_process=2 \
-    "./sdxl_train_network.py" \
+    "$TRAIN_SCRIPT" \
     --pretrained_model_name_or_path="$MODEL_REPO" \
     --train_data_dir="$TRAIN_DIR/img" \
     --output_dir="$TRAIN_DIR/model" \
