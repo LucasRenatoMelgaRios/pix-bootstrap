@@ -20,9 +20,9 @@
 
 checkpoints:
   # WAI-illustrious-SDXL v17.0 (Civitai 827184 / versionId 2883731). Base: Illustrious.
-  # - dest: waiIllustriousSDXL_v170.safetensors
-  #   source: civitai
-  #   id: 2883731
+  - dest: waiIllustriousSDXL_v170.safetensors
+    source: civitai
+    id: 2883731
 
   # RedFuku (chatpig/redfuku en HuggingFace). Base: SDXL estilo Pony (usa tags score_9/source_anime).
   # Es el fp16 TODO-EN-UNO (7.1 GB) → carga con CheckpointLoaderSimple. Repo público (sin token).
@@ -59,51 +59,51 @@ loras:
   # Trigger: "anna yanami (makeine), blue hair, medium hair, ahoge, blue eyes"
   # Outfits (agregar al prompt junto al trigger): school uniform / winter school uniform /
   # swimsuit / ghost costume / outing — ver docs/models.md para el detalle de cada uno.
-  # - dest: anna_yanami_illustrious.safetensors
-  #   source: civitai
-  #   id: 1311670
+  - dest: anna_yanami_illustrious.safetensors
+    source: civitai
+    id: 1311670
 
   # Anna Yanami — para RedFuku / checkpoints Pony. Mismo model 607474, versionId 914046 "v4.0".
   # Trigger: "anna yanami, blue hair, medium hair, ahoge, blue eyes" (sin "(makeine)").
-  # - dest: anna_yanami_pony.safetensors
-  #   source: civitai
-  #   id: 914046
+  - dest: anna_yanami_pony.safetensors
+    source: civitai
+    id: 914046
 
   # Mie Ai (Suki na Ko ga Megane wo Wasureta) - Illustrious
   # Triggers: mie ai, long hair,
-  # - dest: mie_ai_illustrious.safetensors
-  #   source: civitai
-  #   id: 1495191
+  - dest: mie_ai_illustrious.safetensors
+    source: civitai
+    id: 1495191
 
   # Masha (Alya Sometimes Hides Her Feelings) - Illustrious
-  # - dest: masha_illustrious.safetensors
-  #   source: civitai
-  #   id: 1087752
+  - dest: masha_illustrious.safetensors
+    source: civitai
+    id: 1087752
 
   # Ayano Kimishima (Alya Sometimes Hides Her Feelings) - Illustrious
-  # - dest: ayano_illustrious.safetensors
-  #   source: civitai
-  #   id: 1120785
+  - dest: ayano_illustrious.safetensors
+    source: civitai
+    id: 1120785
 
   # Yuki Suou (Alya Sometimes Hides Her Feelings) - Illustrious
-  # - dest: yuki_suou_illustrious.safetensors
-  #   source: civitai
-  #   id: 1295354
+  - dest: yuki_suou_illustrious.safetensors
+    source: civitai
+    id: 1295354
 
   # Alya (Alisa Mikhailovna Kujou) - Pony
-  # - dest: alya_pony.safetensors
-  #   source: civitai
-  #   id: 623038
+  - dest: alya_pony.safetensors
+    source: civitai
+    id: 623038
 
   # Seiha Shiunji (The Shiunji Family Children) - Illustrious
-  # - dest: seiha_illustrious.safetensors
-  #   source: civitai
-  #   id: 1915288
+  - dest: seiha_illustrious.safetensors
+    source: civitai
+    id: 1915288
 
   # Varesa (Genshin Impact) XL/Illustrious LoRa
-  # - dest: varesa_illustrious.safetensors
-  #   source: civitai
-  #   id: 1572713
+  - dest: varesa_illustrious.safetensors
+    source: civitai
+    id: 1572713
 
   # Milena (Secret Class) - Pony
   - dest: milena_lora-000008.safetensors
