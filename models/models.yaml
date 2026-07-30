@@ -107,8 +107,8 @@ loras:
 
   # Milena (Secret Class) - Pony
   - dest: milena_lora-000008.safetensors
-    source: direct
-    url: https://civitai.red/api/download/models/3155308
+    source: civitai
+    id: 3155308
     
   # Pretty eyes XL - Illustrious/SDXL
   # Trigger: eye, pretty_eyes
