@@ -93,7 +93,7 @@ loras:
   # Alya (Alisa Mikhailovna Kujou) - Pony
   - dest: alya_pony.safetensors
     source: civitai
-    id: 623038
+    id: 3186908
 
   # Seiha Shiunji (The Shiunji Family Children) - Illustrious
   - dest: seiha_illustrious.safetensors
