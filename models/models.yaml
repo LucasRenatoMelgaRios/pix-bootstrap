@@ -116,6 +116,12 @@ loras:
     source: civitai
     id: 3180282
 
+  # YourMizuki (Twitter OC) - Illustrious / Pony
+  # Trigger: YourMizuki, 1girl
+  - dest: YourMizuki.safetensors
+    source: civitai
+    id: 2412176
+
 vae: []
 
 controlnet: []
