@@ -122,6 +122,12 @@ loras:
     source: civitai
     id: 2412176
 
+  # Michinoku Komaro (Seitokai ni mo Ana wa Aru!) - Illustrious
+  # Trigger: m_komaro, 1girl, pink hair, ahoge, blue eyes, bags under eyes, low ponytail
+  - dest: michinoku_komaro_ilxl_v1.0_ex.safetensors
+    source: civitai
+    id: 3399408
+
 vae: []
 
 controlnet: []
