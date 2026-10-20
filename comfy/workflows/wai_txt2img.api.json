@@ -17,7 +17,7 @@
   },
   "4": {
     "class_type": "CheckpointLoaderSimple",
-    "inputs": { "ckpt_name": "waiIllustriousSDXL_v170.safetensors" }
+    "inputs": { "ckpt_name": "waiIllustriousSDXL_v120.safetensors" }
   },
   "5": {
     "class_type": "EmptyLatentImage",

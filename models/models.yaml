@@ -19,10 +19,10 @@
 # ──────────────────────────────────────────────────────────────────────────────
 
 checkpoints:
-  # WAI-illustrious-SDXL v17.0 (Civitai 827184 / versionId 2883731). Base: Illustrious.
-  - dest: waiIllustriousSDXL_v170.safetensors
+  # WAI-illustrious-SDXL v12.0 (Civitai 827184 / versionId 1490781). Base: Illustrious.
+  - dest: waiIllustriousSDXL_v120.safetensors
     source: civitai
-    id: 2883731
+    id: 1490781
 
   # RedFuku (chatpig/redfuku en HuggingFace). Base: SDXL estilo Pony (usa tags score_9/source_anime).
   # Es el fp16 TODO-EN-UNO (7.1 GB) → carga con CheckpointLoaderSimple. Repo público (sin token).
