@@ -128,6 +128,51 @@ loras:
     source: civitai
     id: 3399408
 
+  # Ahn Ji-young (Circles) - Illustrious
+  - dest: Ahn Ji-young illustxl.safetensors
+    source: civitai
+    id: 1955331
+
+  # Baek Ga-in (Circles) - Illustrious
+  - dest: Baek Ga-in illustxl.safetensors
+    source: civitai
+    id: 1955346
+
+  # Han Nah-Lee (Circles) - Illustrious
+  - dest: Han nahLee illustxl.safetensors
+    source: civitai
+    id: 1955361
+
+  # Kang Su-yeon (Circles) - Illustrious
+  - dest: Kang Suyeon illustxl.safetensors
+    source: civitai
+    id: 1955425
+
+  # Lee Ye-rin (Circles) - Illustrious
+  - dest: Lee Yerin illustxl.safetensors
+    source: civitai
+    id: 1955483
+
+  # Park Da-young (Circles) - Illustrious
+  - dest: Park Dayoung illustxl.safetensors
+    source: civitai
+    id: 1955502
+
+  # Park Se-yoon (Circles) - Illustrious
+  - dest: Park Seyoon illustxl.safetensors
+    source: civitai
+    id: 1955550
+
+  # Song Yeon-woo (Circles) - Illustrious
+  - dest: Song Yeonwoo illustxl.safetensors
+    source: civitai
+    id: 1955602
+
+  # Yoo Eun-hee (Circles) - Illustrious
+  - dest: Yoo Eunhee illustxl.safetensors
+    source: civitai
+    id: 1955613
+
 vae: []
 
 controlnet: []
