@@ -128,50 +128,35 @@ loras:
     source: civitai
     id: 3399408
 
-  # Ahn Ji-young (Circles) - Illustrious
-  - dest: Ahn Ji-young illustxl.safetensors
+  # Cho Da-eun (Sex Study Group) - Illustrious
+  - dest: Cho Da-eun illustxl.safetensors
     source: civitai
-    id: 1955331
+    id: 1123573
 
-  # Baek Ga-in (Circles) - Illustrious
-  - dest: Baek Ga-in illustxl.safetensors
+  # Kim Se-yeon (Sex Study Group) - Illustrious
+  - dest: Kim Se-yeon illustxl.safetensors
     source: civitai
-    id: 1955346
+    id: 1127249
 
-  # Han Nah-Lee (Circles) - Illustrious
-  - dest: Han nahLee illustxl.safetensors
+  # Kang Hyeonmi (Sex Study Group) - Illustrious
+  - dest: Kang Hyeonmi illustxl.safetensors
     source: civitai
-    id: 1955361
+    id: 1127227
 
-  # Kang Su-yeon (Circles) - Illustrious
-  - dest: Kang Suyeon illustxl.safetensors
+  # Lee Eunjeong (Sex Study Group) - Illustrious
+  - dest: Lee Eunjeong illustxl.safetensors
     source: civitai
-    id: 1955425
+    id: 1127316
 
-  # Lee Ye-rin (Circles) - Illustrious
-  - dest: Lee Yerin illustxl.safetensors
+  # Han Soohyun (Sex Study Group) - Illustrious
+  - dest: Han Soohyun illustxl.safetensors
     source: civitai
-    id: 1955483
+    id: 1123552
 
-  # Park Da-young (Circles) - Illustrious
-  - dest: Park Dayoung illustxl.safetensors
+  # Han na-eun (Sex Study Group) - Illustrious
+  - dest: Han na-eun illustxl.safetensors
     source: civitai
-    id: 1955502
-
-  # Park Se-yoon (Circles) - Illustrious
-  - dest: Park Seyoon illustxl.safetensors
-    source: civitai
-    id: 1955550
-
-  # Song Yeon-woo (Circles) - Illustrious
-  - dest: Song Yeonwoo illustxl.safetensors
-    source: civitai
-    id: 1955602
-
-  # Yoo Eun-hee (Circles) - Illustrious
-  - dest: Yoo Eunhee illustxl.safetensors
-    source: civitai
-    id: 1955613
+    id: 1123516
 
 vae: []
 
