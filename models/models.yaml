@@ -158,6 +158,11 @@ loras:
     source: civitai
     id: 1123516
 
+  # Song Yunji (That's Not How You Do It) - Illustrious
+  - dest: YUNJI_IXL_V1.safetensors
+    source: civitai
+    id: 1435110
+
 vae: []
 
 controlnet: []
