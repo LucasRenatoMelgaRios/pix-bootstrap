@@ -163,6 +163,11 @@ loras:
     source: civitai
     id: 1435110
 
+  # Jung Daon (That's Not How You Do It) - Illustrious
+  - dest: DAON_IXL_V2.safetensors
+    source: civitai
+    id: 1427355
+
 vae: []
 
 controlnet: []
